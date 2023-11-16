@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw638itg630uw"]
+
+[ext_resource type="PackedScene" uid="uid://ba4cnak0ew863" path="res://map.tscn" id="1_6yi5f"]
+[ext_resource type="Script" path="res://UserMovement.gd" id="1_kl3ye"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.513, 0)
+fov = 20.0
+size = 5.0
+script = ExtResource("1_kl3ye")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.707933, 0.706279, 0, -0.706279, -0.707933, 0, 2.82056, 0)
+
+[node name="map" parent="." instance=ExtResource("1_6yi5f")]

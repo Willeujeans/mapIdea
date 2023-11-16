@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://nvexp26y0on7"]
+
+[ext_resource type="Script" path="res://block.gd" id="1_3007u"]
+[ext_resource type="Material" uid="uid://dhnc27xh75cll" path="res://mapMat.tres" id="2_txbsv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8suc6"]
+material = ExtResource("2_txbsv")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3js14"]
+
+[node name="block" type="Node3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_3007u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8suc6")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_3js14")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
