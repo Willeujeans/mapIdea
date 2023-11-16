@@ -12,6 +12,12 @@ size = 5.0
 script = ExtResource("1_kl3ye")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.707933, 0.706279, 0, -0.706279, -0.707933, 0, 2.82056, 0)
+transform = Transform3D(-0.998067, 0.0438925, 0.0439953, -3.3141e-09, -0.707933, 0.706279, 0.0621461, 0.704914, 0.706565, 0, 2.82056, 0)
+light_energy = 0.1
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.770936, -0.449838, -0.450892, 1.64886e-08, -0.707933, 0.706279, -0.636913, -0.544496, -0.545771, 0, 2.82056, 1.73114)
+shadow_enabled = true
 
 [node name="map" parent="." instance=ExtResource("1_6yi5f")]

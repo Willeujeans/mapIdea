@@ -12,7 +12,6 @@ func _process(delta):
 		if mouseInside:
 			print("clicked")
 			print(get_parent().matrixDict.get(mapLocation).mapLocation)
-			get_node("MeshInstance3D").scale -= Vector3(0.1, 0.1, 0.1)
 			get_parent().createSquareHere(mapLocation)
 
 func _on_area_3d_mouse_entered():
