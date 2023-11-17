@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba4cnak0ew863"]
 
-[ext_resource type="Script" path="res://map.gd" id="1_ith44"]
+[ext_resource type="Script" path="res://Scripts/map.gd" id="1_n1n5f"]
 
 [node name="map" type="Node3D"]
-script = ExtResource("1_ith44")
+script = ExtResource("1_n1n5f")
 gridSize = 25

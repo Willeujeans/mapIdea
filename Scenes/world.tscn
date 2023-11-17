@@ -1,15 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dw638itg630uw"]
 
-[ext_resource type="PackedScene" uid="uid://ba4cnak0ew863" path="res://map.tscn" id="1_6yi5f"]
-[ext_resource type="Script" path="res://UserMovement.gd" id="1_kl3ye"]
+[ext_resource type="PackedScene" uid="uid://ba4cnak0ew863" path="res://Scenes/map.tscn" id="1_10jve"]
+[ext_resource type="PackedScene" uid="uid://bgmmn2hvtjrvt" path="res://Scenes/User.tscn" id="2_vf7tx"]
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.513, 0)
-fov = 20.0
-size = 5.0
-script = ExtResource("1_kl3ye")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.998067, 0.0438925, 0.0439953, -3.3141e-09, -0.707933, 0.706279, 0.0621461, 0.704914, 0.706565, 0, 2.82056, 0)
@@ -20,4 +14,6 @@ shadow_enabled = true
 transform = Transform3D(0.770936, -0.449838, -0.450892, 1.64886e-08, -0.707933, 0.706279, -0.636913, -0.544496, -0.545771, 0, 2.82056, 1.73114)
 shadow_enabled = true
 
-[node name="map" parent="." instance=ExtResource("1_6yi5f")]
+[node name="map" parent="." instance=ExtResource("1_10jve")]
+
+[node name="User" parent="." instance=ExtResource("2_vf7tx")]

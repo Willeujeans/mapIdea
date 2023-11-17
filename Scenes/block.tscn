@@ -1,16 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://nvexp26y0on7"]
 
-[ext_resource type="Script" path="res://block.gd" id="1_3007u"]
-[ext_resource type="Material" uid="uid://dhnc27xh75cll" path="res://mapMat.tres" id="2_txbsv"]
+[ext_resource type="Script" path="res://Scripts/block.gd" id="1_e4g4i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbynq"]
+albedo_color = Color(0.141176, 0.156863, 0.219608, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8suc6"]
-material = ExtResource("2_txbsv")
+material = SubResource("StandardMaterial3D_gbynq")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3js14"]
 
 [node name="block" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-script = ExtResource("1_3007u")
+script = ExtResource("1_e4g4i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_8suc6")
