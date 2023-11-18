@@ -15,5 +15,6 @@ transform = Transform3D(0.770936, -0.449838, -0.450892, 1.64886e-08, -0.707933, 
 shadow_enabled = true
 
 [node name="map" parent="." instance=ExtResource("1_10jve")]
+gridSize = 10
 
 [node name="User" parent="." instance=ExtResource("2_vf7tx")]

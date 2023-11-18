@@ -1,26 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://nvexp26y0on7"]
+[gd_scene load_steps=6 format=3 uid="uid://nvexp26y0on7"]
 
 [ext_resource type="Script" path="res://Scripts/block.gd" id="1_e4g4i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbynq"]
-albedo_color = Color(0.141176, 0.156863, 0.219608, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8suc6"]
-material = SubResource("StandardMaterial3D_gbynq")
+[sub_resource type="BoxMesh" id="BoxMesh_ymnxk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3js14"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tc27m"]
+transparency = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qyc7s"]
+material = SubResource("StandardMaterial3D_tc27m")
 
 [node name="block" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_e4g4i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_8suc6")
+[node name="box" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ymnxk")
 
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_3js14")
+
+[node name="terrainLayer" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.499526, 0, 0, 0, 0.999052, 0, 0, 0, 0.499526, 2.08165e-12, 0.55, 2.08165e-12)
+visible = false
+mesh = SubResource("PlaneMesh_qyc7s")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

@@ -1,24 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://kv6ktn4re0jg"]
+[gd_scene load_steps=6 format=3 uid="uid://kv6ktn4re0jg"]
 
 [ext_resource type="Script" path="res://Scripts/LevelExporter.gd" id="1_77iwl"]
+[ext_resource type="Script" path="res://Scenes/MapControls.gd" id="1_pbkec"]
+[ext_resource type="Script" path="res://Scenes/ExitButton.gd" id="1_ypoht"]
 [ext_resource type="Script" path="res://Scripts/FileImporter.gd" id="2_rjd6d"]
+[ext_resource type="Script" path="res://Scenes/ToolButton.gd" id="4_am7eo"]
 
-[node name="Control" type="Control"]
+[node name="MapControls" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pbkec")
 
-[node name="FileExporter" type="Node" parent="."]
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 31.0
+text = "X"
+script = ExtResource("1_ypoht")
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1157.0
+offset_top = 984.0
+offset_right = 1234.0
+offset_bottom = 1063.0
+text = "SAVE"
+
+[node name="FileExporter" type="Node" parent="SaveButton"]
 script = ExtResource("1_77iwl")
+
+[node name="ToolButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 908.0
+offset_top = 993.0
+offset_right = 985.0
+offset_bottom = 1057.0
+text = "Tool1"
+script = ExtResource("4_am7eo")
 
 [node name="FileImporter" type="Node" parent="."]
 script = ExtResource("2_rjd6d")
 
-[node name="SaveButton" type="Button" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 77.0
-offset_bottom = 28.0
-text = "SAVE"
+offset_left = 761.0
+offset_top = 984.0
+offset_right = 1134.0
+offset_bottom = 988.0
+
+[connection signal="pressed" from="ExitButton" to="ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="SaveButton" to="SaveButton/FileExporter" method="_on_save_button_pressed"]
+[connection signal="pressed" from="ToolButton" to="ToolButton" method="_on_pressed"]

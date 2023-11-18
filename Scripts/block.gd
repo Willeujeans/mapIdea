@@ -3,18 +3,26 @@ var mapLocation = Vector3(0,0,0)
 var mat = null
 var mouseInside = false
 var locked = false
-# Called when the node enters the scene tree for the first time.
+var terrainType = "d"
+var shapeType = 0
+var shapeTypes = [BoxMesh.new() , CylinderMesh.new()]
+
 func _ready():
-	var colorMod = mapLocation.y*0.5
-	var moddedColor = Color(colorMod,colorMod,colorMod,1)
-	print(moddedColor)
-	var myMaterial = StandardMaterial3D.new()
-	myMaterial.albedo_color = moddedColor
-	var myMesh = get_node("MeshInstance3D")
-	myMesh.set_surface_override_material(0, myMaterial)
+	if shapeType == 1:
+		get_node("box").scale.y = 0.5
+	var newMesh = shapeTypes[shapeType]
+	get_node("box").set_mesh(newMesh)
+	var colorBasedOnHeight = Color(mapLocation.y*0.5,mapLocation.y*0.5,mapLocation.y*0.5,1)
+	createMaterial(colorBasedOnHeight)
 	mouseInside = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func createMaterial(colorInput):
+	var myMaterial = StandardMaterial3D.new()
+	var outLine = load("res://outLineMaterial.tres")
+	myMaterial.next_pass = outLine
+	myMaterial.albedo_color = colorInput
+	$box.set_surface_override_material(0, myMaterial)
+
 func _process(delta):
 	if Input.is_action_just_released("clicked"):
 		if mouseInside:
@@ -22,15 +30,12 @@ func _process(delta):
 	if Input.is_action_pressed("clicked"):
 		if mouseInside:
 			if get_parent().currentHeight == mapLocation.y:
-				print("clicked")
-				print(get_parent().matrixDict.get(mapLocation).mapLocation)
-				get_parent().createSquareHere(mapLocation)
+				get_parent().createSquareHere(position, mapLocation)
 
 func _on_area_3d_mouse_entered():
 	if !Input.is_action_pressed("clicked"):
 		get_parent().currentHeight = mapLocation.y
 	mouseInside = true
 	
-
 func _on_area_3d_mouse_exited():
 	mouseInside = false

@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba4cnak0ew863"]
+[gd_scene load_steps=3 format=3 uid="uid://ba4cnak0ew863"]
 
 [ext_resource type="Script" path="res://Scripts/map.gd" id="1_n1n5f"]
+[ext_resource type="Script" path="res://Scenes/lineGenerator.gd" id="2_vykjj"]
 
 [node name="map" type="Node3D"]
 script = ExtResource("1_n1n5f")
 gridSize = 25
+
+[node name="lineGenerator" type="Node3D" parent="."]
+script = ExtResource("2_vykjj")

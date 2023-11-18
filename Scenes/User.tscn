@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgmmn2hvtjrvt"]
+[gd_scene load_steps=3 format=3 uid="uid://bgmmn2hvtjrvt"]
 
 [ext_resource type="Script" path="res://Scripts/UserMovement.gd" id="1_ia0uv"]
-[ext_resource type="Script" path="res://Scripts/LevelExporter.gd" id="2_3d2dr"]
-[ext_resource type="Script" path="res://Scenes/menuControls.gd" id="2_osmmw"]
-[ext_resource type="Script" path="res://Scripts/FileImporter.gd" id="3_hv1s8"]
+[ext_resource type="PackedScene" uid="uid://kv6ktn4re0jg" path="res://Scenes/MapControls.tscn" id="2_awv7g"]
 
 [node name="User" type="Node3D"]
 
@@ -13,47 +11,4 @@ fov = 20.0
 size = 5.0
 script = ExtResource("1_ia0uv")
 
-[node name="Control" type="Control" parent="Camera3D"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2_osmmw")
-
-[node name="ExitButton" type="Button" parent="Camera3D/Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 31.0
-text = "X"
-
-[node name="SaveButton" type="Button" parent="Camera3D/Control"]
-layout_mode = 0
-offset_left = 1157.0
-offset_top = 984.0
-offset_right = 1234.0
-offset_bottom = 1063.0
-text = "SAVE"
-
-[node name="FileExporter" type="Node" parent="Camera3D/Control/SaveButton"]
-script = ExtResource("2_3d2dr")
-
-[node name="ToolButton" type="Button" parent="Camera3D/Control"]
-layout_mode = 0
-offset_left = 908.0
-offset_top = 993.0
-offset_right = 985.0
-offset_bottom = 1057.0
-text = "Tool1"
-
-[node name="FileImporter" type="Node" parent="Camera3D/Control"]
-script = ExtResource("3_hv1s8")
-
-[node name="ColorRect" type="ColorRect" parent="Camera3D/Control"]
-layout_mode = 0
-offset_left = 761.0
-offset_top = 984.0
-offset_right = 1134.0
-offset_bottom = 988.0
-
-[connection signal="pressed" from="Camera3D/Control/ExitButton" to="Camera3D/Control" method="_on_exit_button_pressed"]
-[connection signal="pressed" from="Camera3D/Control/SaveButton" to="Camera3D/Control/SaveButton/FileExporter" method="_on_save_button_pressed"]
+[node name="MapControls" parent="Camera3D" instance=ExtResource("2_awv7g")]
