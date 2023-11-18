@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgmmn2hvtjrvt"]
+
+[ext_resource type="Script" path="res://Scripts/s_userMovement.gd" id="1_ia0uv"]
+[ext_resource type="Script" path="res://Scripts/s_mapControls.gd" id="2_pjc2v"]
+
+[node name="player" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.513, 0)
+fov = 20.0
+size = 5.0
+script = ExtResource("1_ia0uv")
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_pjc2v")
+
+[node name="SaveButton" type="Button" parent="Camera3D/Control"]
+offset_left = 1157.0
+offset_top = 984.0
+offset_right = 1234.0
+offset_bottom = 1063.0
+text = "SAVE"
+
+[node name="ToolButton" type="Button" parent="Camera3D/Control"]
+offset_left = 908.0
+offset_top = 993.0
+offset_right = 985.0
+offset_bottom = 1057.0
+text = "Tool1"
+
+[connection signal="pressed" from="Camera3D/Control/SaveButton" to="Camera3D/Control" method="_on_save_button_pressed"]
+[connection signal="pressed" from="Camera3D/Control/ToolButton" to="Camera3D/Control" method="_on_tool_button_pressed"]

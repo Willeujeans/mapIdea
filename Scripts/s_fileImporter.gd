@@ -2,12 +2,6 @@ extends Node
 var saveDocumentPath = "/Users/willschmitz/Documents/Code/mapIdea/SavedData"
 @onready var blockScene = load("res://Scenes/block.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print("Importing Map...")
-	var importedMapString = openFile(saveDocumentPath + "/save_game.md")
-	generateArrayFromString(importedMapString)
-
 func checkForNumber(number):
 	if number == "0" || number == "1" || number == "2" || number == "3" || number == "4" || number == "5" || number == "6" || number == "7" || number == "8" || number == "9":
 		return true
@@ -66,11 +60,6 @@ func create3DArray(gridSize):
 			array[x][y] = []
 			array[x][y].resize(gridSize)    # Z-dimension
 	return array
-
-func openFile(path):
-	var file = FileAccess.open(path, FileAccess.READ)
-	var content = file.get_as_text()
-	return content
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
