@@ -20,7 +20,7 @@ func _ready():
 		get_node("box").scale.y = 0.5
 	var newMesh = shapeTypes[shapeType]
 	get_node("box").set_mesh(newMesh)
-	var colorBasedOnHeight = Color(mapLocation.y*0.5,mapLocation.y*0.5,mapLocation.y*0.5,1)
+	var colorBasedOnHeight = Color(mapLocation.y*0.1,mapLocation.y*0.1,mapLocation.y*0.1,1)
 	createMaterial(colorBasedOnHeight)
 	mouseInside = false
 

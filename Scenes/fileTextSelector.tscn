@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b277k0yk8a1tf"]
 
-[ext_resource type="Script" path="res://Scenes/fileTextSelector.gd" id="1_b856m"]
+[ext_resource type="Script" path="res://Scripts/fileTextSelector.gd" id="1_jrjlc"]
 [ext_resource type="FontFile" uid="uid://b6cietr2hys0p" path="res://Zilla_Slab/ZillaSlab-Regular.ttf" id="1_l6omh"]
 
 [node name="fileTextSelector" type="Control"]
@@ -8,7 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_b856m")
+script = ExtResource("1_jrjlc")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0

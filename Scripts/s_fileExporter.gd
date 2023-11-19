@@ -9,7 +9,3 @@ static func write_file(file_name, string):
 	var file = FileAccess.open(file_name, FileAccess.WRITE)
 	file.store_string(string)
 	file.close()
-
-
-
-

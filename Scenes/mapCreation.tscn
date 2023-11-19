@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwj8etwupd2j"]
+[gd_scene load_steps=3 format=3 uid="uid://bwj8etwupd2j"]
 
 [ext_resource type="Script" path="res://Scripts/s_mapCreation.gd" id="1_iq04u"]
 [ext_resource type="FontFile" uid="uid://e2jsgdulh873" path="res://Zilla_Slab/ZillaSlab-Medium.ttf" id="1_u0a53"]
-[ext_resource type="PackedScene" uid="uid://lm2pn2q6aybi" path="res://Scenes/helpers/threeDArrayMaker.tscn" id="3_wmpf0"]
 
 [node name="mapCreation" type="Control"]
 layout_mode = 3
@@ -31,6 +30,14 @@ offset_top = 246.0
 offset_right = 1332.0
 offset_bottom = 324.0
 placeholder_text = "name your file"
+
+[node name="createMap" type="Button" parent="."]
+layout_mode = 0
+offset_left = 626.0
+offset_top = 860.0
+offset_right = 1130.0
+offset_bottom = 1038.0
+text = "create map"
 
 [node name="gridSizeButtons" type="Control" parent="."]
 anchors_preset = 0
@@ -61,17 +68,7 @@ offset_right = 1424.0
 offset_bottom = 594.0
 text = "128x128"
 
-[node name="createMap" type="Button" parent="."]
-layout_mode = 0
-offset_left = 626.0
-offset_top = 860.0
-offset_right = 1130.0
-offset_bottom = 1038.0
-text = "create map"
-
-[node name="threeDArrayMaker" parent="." instance=ExtResource("3_wmpf0")]
-
+[connection signal="pressed" from="createMap" to="." method="_on_create_map_pressed"]
 [connection signal="pressed" from="gridSizeButtons/thirtyTwo" to="." method="_on_thirty_two_pressed"]
 [connection signal="pressed" from="gridSizeButtons/sixtyFour" to="." method="_on_sixty_four_pressed"]
 [connection signal="pressed" from="gridSizeButtons/oneTwentyEight" to="." method="_on_one_twenty_eight_pressed"]
-[connection signal="pressed" from="createMap" to="." method="_on_create_map_pressed"]

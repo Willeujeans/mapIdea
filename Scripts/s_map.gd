@@ -7,7 +7,19 @@ var currentHeight = 0
 var matrix = []
 var currentTerrain = "w"
 var currentShape = 0
-# Called when the node enters the scene tree for the first time.
+
+func _ready():
+	print("mapManager loaded...")
+	var tmp = shell.get_node("tmp")
+	gridSize = tmp.tmpGridSize
+	if tmp.importedFilePath == "":
+		print("creating a new map...")
+		set_Matrix($threeDArray.create(gridSize))
+		createDefaultGrid(gridSize)
+	else:
+		print("creating map from import...")
+		var importedMatrix = $mapImporter.createMatrixFromImport(tmp.importedFilePath)
+		createMapFromImport(importedMatrix, gridSize)
 
 func set_Matrix(in_matrix):
 	matrix = in_matrix
@@ -15,11 +27,33 @@ func set_Matrix(in_matrix):
 func set_MatrixAtIndex(x,y,z, object):
 	matrix[x][y][z] = object
 
-func _ready():
-	gridSize = shell.get_node("tmp").tmpGridSize
-	print("mapManager loaded...")
-	set_Matrix($threeDArrayMaker.create3DArray(gridSize))
-	populateDefaultGrid(gridSize)
+func createMapFromImport(in_matrix, size):
+	set_Matrix(in_matrix)
+	var positionForCubes = Vector3(0,0,0)
+	for y in size:
+		for z in size:
+			for x in size:
+				if in_matrix[x][y][z] != null:
+					in_matrix[x][y][z].position = Vector3(positionForCubes.x, positionForCubes.y, positionForCubes.z)
+					add_child(in_matrix[x][y][z])
+				positionForCubes.x += scaleForCubes.x
+			positionForCubes.x = 0
+			positionForCubes.z += scaleForCubes.z
+		positionForCubes.z = 0
+		positionForCubes.y += scaleForCubes.y
+
+func createDefaultGrid(gridSize):
+	var positionForCubes = Vector3(0, 0 ,0)
+	for i in gridSize:
+		positionForCubes.x = 0
+		for j in gridSize:
+			var newBlock = blockScene.instantiate()
+			newBlock.position = Vector3(positionForCubes.x, 1, positionForCubes.z)
+			positionForCubes.x += scaleForCubes.x
+			newBlock.mapLocation = Vector3(j, 0, i)
+			set_MatrixAtIndex(j,0,i,newBlock)
+			add_child(newBlock)
+		positionForCubes.z += 0.5
 
 func createSquare(myLocation, mapPosition):
 	var newMapBlock = blockScene.instantiate()
@@ -29,19 +63,6 @@ func createSquare(myLocation, mapPosition):
 	set_MatrixAtIndex(mapPosition.x,mapPosition.y+1,mapPosition.z,newMapBlock)
 	newMapBlock.position = Vector3(myLocation.x,myLocation.y+scaleForCubes.y,myLocation.z)
 	add_child(newMapBlock)
-	
-func populateDefaultGrid(gridSize):
-	var positionForCubes = Vector3(0, 0 ,0)
-	for i in gridSize:
-		positionForCubes.x = 0
-		for j in gridSize:
-			var newBlock = blockScene.instantiate()
-			newBlock.position = Vector3(positionForCubes.x, 1, positionForCubes.y)
-			positionForCubes.x += 0.5
-			newBlock.mapLocation = Vector3(j, 0, i)
-			set_MatrixAtIndex(j,0,i,newBlock)
-			add_child(newBlock)
-		positionForCubes.y += 0.5
 
 func saveCurrentMap():
 	var tmp = shell.get_node("tmp")

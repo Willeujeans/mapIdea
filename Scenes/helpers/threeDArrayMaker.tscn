@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://lm2pn2q6aybi"]
-
-[ext_resource type="Script" path="res://s_3dArrayMaker.gd" id="1_4vo4u"]
-
-[node name="threeDArrayMaker" type="Node"]
-script = ExtResource("1_4vo4u")

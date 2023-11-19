@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dw638itg630uw"]
+[gd_scene load_steps=10 format=3 uid="uid://dw638itg630uw"]
 
 [ext_resource type="Script" path="res://Scripts/s_sceneManager.gd" id="1_u886d"]
 [ext_resource type="PackedScene" uid="uid://4afy2lppcqje" path="res://Scenes/helpers/sceneChanger.tscn" id="2_0ecs1"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://ce3ntsjolpvyv" path="res://Scenes/helpers/fileReader.tscn" id="4_t1fat"]
 [ext_resource type="PackedScene" uid="uid://cayscq5417w5y" path="res://Scenes/helpers/fileExporter.tscn" id="5_gt2i4"]
 [ext_resource type="Script" path="res://Scripts/s_exitButton.gd" id="5_mfltu"]
-[ext_resource type="Script" path="res://Scripts/s_fileImporter.gd" id="5_oi11u"]
 [ext_resource type="Script" path="res://Scripts/s_tmp.gd" id="5_wrwh6"]
 
 [node name="shell" type="Node3D"]
@@ -19,9 +18,6 @@ script = ExtResource("1_u886d")
 [node name="directoryScanner" parent="." instance=ExtResource("3_hk125")]
 
 [node name="fileReader" parent="." instance=ExtResource("4_t1fat")]
-
-[node name="fileImporter" type="Node" parent="."]
-script = ExtResource("5_oi11u")
 
 [node name="fileExporter" parent="." instance=ExtResource("5_gt2i4")]
 

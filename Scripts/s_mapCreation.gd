@@ -1,7 +1,7 @@
 extends Control
 @onready var shell = get_tree().get_root().get_node("shell")
 @onready var mapWorldScene = load("res://Scenes/mapWorld.tscn")
-var mapSize = 64
+var mapSize = 4
 func set_MapSize(num):
 	mapSize = num
 

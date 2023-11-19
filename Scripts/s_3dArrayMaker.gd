@@ -1,6 +1,6 @@
 extends Node
 
-func create3DArray(gridSize):
+func create(gridSize):
 	var array = []
 	array.resize(gridSize)    # X-dimension
 	for x in gridSize:    # this method should be faster than range since it uses a real iterator iirc
