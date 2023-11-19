@@ -50,6 +50,8 @@ func createBlocks(in_array, gridSize):
 			print("EX" , matrix[5][5][5].terrainType)
 			print("DONE")
 
+
+#replace with 3darray node!!!!!
 func create3DArray(gridSize):
 	var array = []
 	array.resize(gridSize)    # X-dimension

@@ -20,7 +20,7 @@ script = ExtResource("1_u886d")
 
 [node name="fileReader" parent="." instance=ExtResource("4_t1fat")]
 
-[node name="FileImporter" type="Node" parent="."]
+[node name="fileImporter" type="Node" parent="."]
 script = ExtResource("5_oi11u")
 
 [node name="fileExporter" parent="." instance=ExtResource("5_gt2i4")]
