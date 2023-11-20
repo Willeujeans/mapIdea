@@ -1,11 +1,19 @@
 extends Node3D
 var mapLocation = Vector3(0,0,0)
 var mat = null
-var mouseInside = false
-var terrainType = "d"
+var terrainType = "b"
 var shapeType = 0
-var shapeTypes = [BoxMesh.new() , CylinderMesh.new()]
 @onready var shell = get_tree().get_root().get_node("shell")
+@onready var allSides = load("res://models/allSides.obj")
+@onready var bottom = load("res://models/bottom.obj")
+@onready var bottomLeft = load("res://models/bottomLeft.obj")
+@onready var bottomRight = load("res://models/bottomRight.obj")
+@onready var left = load("res://models/left.obj")
+@onready var regular = load("res://models/regular.obj")
+@onready var right = load("res://models/right.obj")
+@onready var top = load("res://models/top.obj")
+@onready var topLeft = load("res://models/topLeft.obj")
+@onready var topRight = load("res://models/topRight.obj")
 
 func set_TerrainType(in_terrain):
 	terrainType = in_terrain
@@ -17,28 +25,8 @@ func set_ShapeType(in_shapeType):
 	shapeType = in_shapeType
 
 func _ready():
-	if shapeType == 1:
-		get_node("box").scale.y = 0.5
-	var newMesh = shapeTypes[shapeType]
-	get_node("box").set_mesh(newMesh)
 	var colorBasedOnHeight = Color(mapLocation.y*0.1,mapLocation.y*0.1,mapLocation.y*0.1,1)
 	createMaterial(colorBasedOnHeight)
-	mouseInside = false
-
-func _process(delta):
-	if Input.is_action_just_released("clicked"):
-		if mouseInside:
-			get_parent().currentHeight = mapLocation.y
-	if Input.is_action_pressed("clicked"):
-		if mouseInside:
-			if get_parent().currentHeight == mapLocation.y:
-				if shell.get_node("tmp").UIlock == false:
-					get_parent().createSquare(position, mapLocation)
-	if Input.is_action_pressed("otherClicked"):
-		if mouseInside:
-			if get_parent().currentHeight == mapLocation.y:
-				if shell.get_node("tmp").UIlock == false:
-					get_parent().destroySquare(position, mapLocation)
 
 func createMaterial(colorInput):
 	var myMaterial = StandardMaterial3D.new()
@@ -48,9 +36,6 @@ func createMaterial(colorInput):
 	$box.set_surface_override_material(0, myMaterial)
 
 func _on_area_3d_mouse_entered():
-	if !Input.is_action_pressed("clicked"):
-		get_parent().currentHeight = mapLocation.y
-	mouseInside = true
-	
-func _on_area_3d_mouse_exited():
-	mouseInside = false
+	var playerController = shell.get_node("container").get_node("mapWorld").get_node("player")
+	playerController.set_HoveredBlock(self)
+	playerController.set_Height()

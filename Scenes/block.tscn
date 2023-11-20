@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://nvexp26y0on7"]
 
 [ext_resource type="Script" path="res://Scripts/s_block.gd" id="1_e4g4i"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ymnxk"]
+[ext_resource type="ArrayMesh" uid="uid://c7e1k4hwmptx1" path="res://models/regular.obj" id="2_acrrp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3js14"]
 
@@ -17,7 +16,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_e4g4i")
 
 [node name="box" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_ymnxk")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("2_acrrp")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -30,4 +30,3 @@ visible = false
 mesh = SubResource("PlaneMesh_qyc7s")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

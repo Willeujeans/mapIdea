@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgmmn2hvtjrvt"]
 
-[ext_resource type="Script" path="res://Scripts/s_userMovement.gd" id="1_ia0uv"]
+[ext_resource type="Script" path="res://Scripts/s_userControls.gd" id="1_qntdn"]
 [ext_resource type="Script" path="res://Scripts/s_mapControls.gd" id="2_pjc2v"]
 
 [node name="player" type="Node3D"]
+script = ExtResource("1_qntdn")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="playerCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.513, 0)
 fov = 20.0
 size = 5.0
-script = ExtResource("1_ia0uv")
 
-[node name="Control" type="Control" parent="Camera3D"]
+[node name="Control" type="Control" parent="playerCamera"]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("2_pjc2v")
 
-[node name="ToolButton" type="Button" parent="Camera3D/Control"]
+[node name="ToolButton" type="Button" parent="playerCamera/Control"]
 layout_mode = 0
 offset_left = 916.0
 offset_top = 49.0
@@ -33,7 +33,7 @@ offset_right = 993.0
 offset_bottom = 113.0
 text = "Tool1"
 
-[node name="saveButton" type="Button" parent="Camera3D/Control"]
+[node name="saveButton" type="Button" parent="playerCamera/Control"]
 layout_mode = 0
 offset_left = 1070.0
 offset_top = 64.0
@@ -41,11 +41,11 @@ offset_right = 1168.0
 offset_bottom = 110.0
 text = "SAVE"
 
-[connection signal="mouse_entered" from="Camera3D/Control" to="Camera3D/Control" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Camera3D/Control" to="Camera3D/Control" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Camera3D/Control/ToolButton" to="Camera3D/Control" method="_on_tool_button_mouse_entered"]
-[connection signal="mouse_exited" from="Camera3D/Control/ToolButton" to="Camera3D/Control" method="_on_tool_button_mouse_exited"]
-[connection signal="pressed" from="Camera3D/Control/ToolButton" to="Camera3D/Control" method="_on_tool_button_pressed"]
-[connection signal="mouse_entered" from="Camera3D/Control/saveButton" to="Camera3D/Control" method="_on_save_button_mouse_entered"]
-[connection signal="mouse_exited" from="Camera3D/Control/saveButton" to="Camera3D/Control" method="_on_save_button_mouse_exited"]
-[connection signal="pressed" from="Camera3D/Control/saveButton" to="Camera3D/Control" method="_on_save_button_pressed"]
+[connection signal="mouse_entered" from="playerCamera/Control" to="playerCamera/Control" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="playerCamera/Control" to="playerCamera/Control" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="playerCamera/Control/ToolButton" to="playerCamera/Control" method="_on_tool_button_mouse_entered"]
+[connection signal="mouse_exited" from="playerCamera/Control/ToolButton" to="playerCamera/Control" method="_on_tool_button_mouse_exited"]
+[connection signal="pressed" from="playerCamera/Control/ToolButton" to="playerCamera/Control" method="_on_tool_button_pressed"]
+[connection signal="mouse_entered" from="playerCamera/Control/saveButton" to="playerCamera/Control" method="_on_save_button_mouse_entered"]
+[connection signal="mouse_exited" from="playerCamera/Control/saveButton" to="playerCamera/Control" method="_on_save_button_mouse_exited"]
+[connection signal="pressed" from="playerCamera/Control/saveButton" to="playerCamera/Control" method="_on_save_button_pressed"]

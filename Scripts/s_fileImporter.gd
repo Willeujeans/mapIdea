@@ -43,7 +43,7 @@ func populateMatrix(in_array, size):
 	for n in in_array:
 		if n != "a":
 			var newBlock = blockScene.instantiate()
-			newBlock.terrainType = n
+			newBlock.set_TerrainType(n)
 			newBlock.mapLocation = Vector3(index.x, index.y, index.z)
 			matrix[index.x][index.y][index.z] = newBlock
 		else:
