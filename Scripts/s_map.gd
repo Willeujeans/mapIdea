@@ -1,7 +1,7 @@
 extends Node3D
 @onready var blockScene = load("res://Scenes/block.tscn")
 @onready var shell = get_tree().get_root().get_node("shell")
-var gridSize = 10
+var gridSize = 4
 var scaleForCubes = Vector3(0.5,0.5,0.5)
 var currentHeight = 0
 var matrix = []
@@ -11,14 +11,15 @@ var currentShape = 0
 func _ready():
 	print("mapManager loaded...")
 	var tmp = shell.get_node("tmp")
-	gridSize = tmp.tmpGridSize
 	if tmp.importedFilePath == "":
+		gridSize = tmp.tmpGridSize
 		print("creating a new map...")
 		set_Matrix($threeDArray.create(gridSize))
 		createDefaultGrid(gridSize)
 	else:
 		print("creating map from import...")
 		var importedMatrix = $mapImporter.createMatrixFromImport(tmp.importedFilePath)
+		gridSize = tmp.tmpGridSize
 		createMapFromImport(importedMatrix, gridSize)
 
 func set_Matrix(in_matrix):

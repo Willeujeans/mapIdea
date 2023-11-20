@@ -9,8 +9,9 @@ func createMatrixFromImport(filePath):
 	print("IMPORT MATRIX GENERATING...")
 	var mapString = $fileReader.textFromFile(filePath)
 	var mapArrayData = RLEtoArray(mapString)
-	var populatedMatrix = populateMatrix(mapArrayData[1],mapArrayData[0])
-	shell.get_node("tmp").tmpGridSize = mapArrayData[0]
+	shell.get_node("tmp").set_TmpGridSize(mapArrayData.get("size"))
+	print("mapSize gotten: ",mapArrayData.get("size"))
+	var populatedMatrix = populateMatrix(mapArrayData.get("data"), mapArrayData.get("size"))
 	return populatedMatrix
 
 
@@ -30,14 +31,14 @@ func RLEtoArray(mapString):
 			for n in int(count):
 				arrayOfBlocks.append(currentTerrain)
 			count = ""
-	var dataArray = []
-	dataArray.append(int(importedGridSize))
-	dataArray.append(arrayOfBlocks)
+	var dataArray = {}
+	dataArray["size"] = int(importedGridSize)
+	dataArray["data"] = arrayOfBlocks
 	return dataArray
 
-func populateMatrix(in_array, gridSize):
+func populateMatrix(in_array, size):
 	print(">import matrix populating...")
-	var matrix = $threeDArray.create(gridSize)
+	var matrix = $threeDArray.create(size)
 	var index = Vector3(0,0,0)
 	for n in in_array:
 		if n != "a":
@@ -48,12 +49,12 @@ func populateMatrix(in_array, gridSize):
 		else:
 			matrix[index.x][index.y][index.z] = null
 		index.x += 1
-		if index.x >= gridSize:
+		if index.x >= size:
 			index.x = 0
 			index.z += 1
-		if index.z >= gridSize:
+		if index.z >= size:
 			index.z = 0
 			index.y += 1
-		if index.y >= gridSize:
+		if index.y >= size:
 			print("DONE")
 	return matrix

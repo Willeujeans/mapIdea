@@ -1,5 +1,5 @@
 extends Node
-var tmpGridSize = 10
+var tmpGridSize = 4
 var nameOfFile = ""
 var saveFilePath = "/Users/willschmitz/Documents/Code/mapIdea/SavedData/"
 var importedFilePath = ""
