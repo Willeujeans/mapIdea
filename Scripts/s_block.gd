@@ -5,6 +5,7 @@ var mouseInside = false
 var terrainType = "d"
 var shapeType = 0
 var shapeTypes = [BoxMesh.new() , CylinderMesh.new()]
+@onready var shell = get_tree().get_root().get_node("shell")
 
 func set_TerrainType(in_terrain):
 	terrainType = in_terrain
@@ -31,7 +32,13 @@ func _process(delta):
 	if Input.is_action_pressed("clicked"):
 		if mouseInside:
 			if get_parent().currentHeight == mapLocation.y:
-				get_parent().createSquare(position, mapLocation)
+				if shell.get_node("tmp").UIlock == false:
+					get_parent().createSquare(position, mapLocation)
+	if Input.is_action_pressed("otherClicked"):
+		if mouseInside:
+			if get_parent().currentHeight == mapLocation.y:
+				if shell.get_node("tmp").UIlock == false:
+					get_parent().destroySquare(position, mapLocation)
 
 func createMaterial(colorInput):
 	var myMaterial = StandardMaterial3D.new()

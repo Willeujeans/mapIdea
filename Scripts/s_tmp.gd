@@ -3,6 +3,7 @@ var tmpGridSize = 10
 var nameOfFile = ""
 var saveFilePath = "/Users/willschmitz/Documents/Code/mapIdea/SavedData/"
 var importedFilePath = ""
+var UIlock = false
 
 func set_importedFilePath(in_filePath):
 	importedFilePath = in_filePath

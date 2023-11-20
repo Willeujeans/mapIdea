@@ -64,6 +64,10 @@ func createSquare(myLocation, mapPosition):
 	newMapBlock.position = Vector3(myLocation.x,myLocation.y+scaleForCubes.y,myLocation.z)
 	add_child(newMapBlock)
 
+func destroySquare(myLocation, mapPosition):
+	matrix[mapPosition.x][mapPosition.y][mapPosition.z] = null
+	print("square gone")
+
 func saveCurrentMap():
 	var tmp = shell.get_node("tmp")
 	var fileExporter = shell.get_node("fileExporter")
