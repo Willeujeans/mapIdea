@@ -79,28 +79,34 @@ func createSquare(myLocation, mapPosition):
 		newMapBlock.position = Vector3(myLocation.x,myLocation.y+scaleForCubes.y,myLocation.z)
 		add_child(newMapBlock)
 		var arrayOfNeighborsChecked = []
-		checkFourNeighbors(newMapBlock, arrayOfNeighborsChecked)
+		checkFourNeighbors(newMapBlock.mapLocation, arrayOfNeighborsChecked, true)
 
 #Given a square it will be removed, and the location will be set to null
 func destroySquare(squareToBeDestroyed):
 	if squareToBeDestroyed.terrainType != "b":
 		if squareToBeDestroyed.terrainType != "a":
 			matrix[squareToBeDestroyed.mapLocation.x][squareToBeDestroyed.mapLocation.y][squareToBeDestroyed.mapLocation.z] = null
+			var locationOfDestruction = squareToBeDestroyed.mapLocation
 			squareToBeDestroyed.queue_free()
+			checkFourNeighbors(locationOfDestruction, [], true)
 
 
-#only need to check up, down, left, right
-func checkFourNeighbors(in_cube, arrayOfNeighborsChecked):
+#This does not work for destroying cubes
+#Maybe make the in_cube a location instead?
+func checkFourNeighbors(in_location, arrayOfNeighborsChecked, keepGoing):
+	var in_cube = matrix[in_location.x][in_location.y][in_location.z]
 	for every in arrayOfNeighborsChecked:
 		if in_cube.mapLocation == every.mapLocation:
 			return
-	arrayOfNeighborsChecked.append(in_cube)
+	if in_cube != null:
+		arrayOfNeighborsChecked.append(in_cube)
 	var arrayOfNeighborsToCall = []
-	var mapLoc = in_cube.mapLocation
+	var mapLoc = in_location
 	var rightLoc = null
 	var leftLoc = null
 	var topLoc = null
 	var bottomLoc = null
+	
 	if mapLoc.x+1 < gridSize:
 		rightLoc = matrix[mapLoc.x + 1][mapLoc.y][mapLoc.z]
 	if mapLoc.x-1 >= 0:
@@ -127,61 +133,57 @@ func checkFourNeighbors(in_cube, arrayOfNeighborsChecked):
 	if bottomLoc != null:
 		arrayOfNeighborsToCall.append(bottomLoc)
 		bottomBool = true
-	#Allsides empty case
-	if !rightBool and !leftBool and !topBool and !bottomBool:
-		in_cube.set_Mesh(allSides)
 		
-	#RegularCases
-	if rightBool and leftBool and topBool and bottomBool:
-		in_cube.set_Mesh(regular)
-	if rightBool and leftBool and topBool and !bottomBool:
-		in_cube.set_Mesh(regular)
-	if rightBool and leftBool and !topBool and bottomBool:
-		in_cube.set_Mesh(regular)
-	if rightBool and !leftBool and topBool and bottomBool:
-		in_cube.set_Mesh(regular)
-	if !rightBool and leftBool and topBool and bottomBool:
-		in_cube.set_Mesh(regular)
-	if rightBool and leftBool and !topBool and !bottomBool:
-		in_cube.set_Mesh(regular)
-	if !rightBool and !leftBool and topBool and bottomBool:
-		in_cube.set_Mesh(regular)
 		
-	if rightBool and !leftBool and !topBool and bottomBool:
-		in_cube.set_Mesh(bottomLeft)
-	if !rightBool and leftBool and !topBool and bottomBool:
-		in_cube.set_Mesh(bottomRight)
-	if rightBool and !leftBool and topBool and !bottomBool:
-		in_cube.set_Mesh(topLeft)
-	if !rightBool and leftBool and topBool and !bottomBool:
-		in_cube.set_Mesh(topRight)
-	if rightBool and !leftBool and !topBool and !bottomBool:
-		in_cube.set_Mesh(left)
-	if !rightBool and leftBool and !topBool and !bottomBool:
-		in_cube.set_Mesh(right)
-	if !rightBool and !leftBool and topBool and !bottomBool:
-		in_cube.set_Mesh(top)
-	if !rightBool and !leftBool and !topBool and bottomBool:
-		in_cube.set_Mesh(bottom)
+	if in_cube != null:
+		#Allsides empty case
+		if !rightBool and !leftBool and !topBool and !bottomBool:
+			in_cube.set_Mesh(allSides)
+		
+		#RegularCases
+		if rightBool and leftBool and topBool and bottomBool:
+			in_cube.set_Mesh(regular)
+		if rightBool and leftBool and topBool and !bottomBool:
+			in_cube.set_Mesh(regular)
+		if rightBool and leftBool and !topBool and bottomBool:
+			in_cube.set_Mesh(regular)
+		if rightBool and !leftBool and topBool and bottomBool:
+			in_cube.set_Mesh(regular)
+		if !rightBool and leftBool and topBool and bottomBool:
+			in_cube.set_Mesh(regular)
+		if rightBool and leftBool and !topBool and !bottomBool:
+			in_cube.set_Mesh(regular)
+		if !rightBool and !leftBool and topBool and bottomBool:
+			in_cube.set_Mesh(regular)
+		
+		if rightBool and !leftBool and !topBool and bottomBool:
+			in_cube.set_Mesh(bottomLeft)
+		if !rightBool and leftBool and !topBool and bottomBool:
+			in_cube.set_Mesh(bottomRight)
+		if rightBool and !leftBool and topBool and !bottomBool:
+			in_cube.set_Mesh(topLeft)
+		if !rightBool and leftBool and topBool and !bottomBool:
+			in_cube.set_Mesh(topRight)
+		if rightBool and !leftBool and !topBool and !bottomBool:
+			in_cube.set_Mesh(left)
+		if !rightBool and leftBool and !topBool and !bottomBool:
+			in_cube.set_Mesh(right)
+		if !rightBool and !leftBool and topBool and !bottomBool:
+			in_cube.set_Mesh(top)
+		if !rightBool and !leftBool and !topBool and bottomBool:
+			in_cube.set_Mesh(bottom)
 	#recursive call to all neighbors
 	#MASSIVE ISSUE HERE:
 	#this will call every block it's connected to, which means a whole ground level can be called lagging the system
+	#check neighbors and call functions on the first 4
+	# the first four will then check their neighbors but will not call to them
+	#tada u fixed ur stupid mistake
+	#fuck u
+	if !keepGoing:
+		arrayOfNeighborsToCall = []
+		return
 	for each in arrayOfNeighborsToCall:
-		checkFourNeighbors(each, arrayOfNeighborsChecked)
-
-func checkNeighbors(in_cube):
-	var count = 0
-	for x in range(-1,2):
-		for z in range(-1,2):
-			if x != 0 and z != 0:
-				var movedVector = Vector3(in_cube.mapLocation.x + x,in_cube.mapLocation.y,in_cube.mapLocation.z + z)
-				if matrix[movedVector.x][movedVector.y][movedVector.z] != null:
-					count += 1
-	if count >= 9:
-		in_cube.set_Mesh(regular)
-	else:
-		in_cube.set_Mesh(allSides)
-	print("I have : ",count, " neighbors")
+		checkFourNeighbors(each.mapLocation, arrayOfNeighborsChecked, false)
 
 func saveCurrentMap():
 	var fileExporter = shell.get_node("fileExporter")

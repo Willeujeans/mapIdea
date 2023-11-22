@@ -9,7 +9,6 @@ func loadAllSavedFiles(folder):
 	var filesArray = shell.get_node("directoryScanner").list_files_in_directory(folder)
 	for file in filesArray:
 		$fileVisualContainer.createFileVisual(file)
-		print("FILE: " , file)
 
 func _on_create_new_map_button_pressed():
 	var mapCreationScene = load("res://Scenes/mapCreation.tscn")
