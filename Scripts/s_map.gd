@@ -75,6 +75,7 @@ func createSquare(myLocation, mapPosition):
 		newMapBlock.position = Vector3(myLocation.x,myLocation.y,myLocation.z)
 		add_child(newMapBlock)
 		checkFourNeighbors(newMapBlock.mapLocation, [], true)
+		#checkForLower(newMapBlock.mapLocation)
 
 #Given a square it will be removed, and the location will be set to null
 func destroySquare(squareToBeDestroyed):
@@ -179,6 +180,12 @@ func checkFourNeighbors(in_location, arrayOfNeighborsChecked, keepGoing):
 		return
 	for each in arrayOfNeighborsToCall:
 		checkFourNeighbors(each.mapLocation, arrayOfNeighborsChecked, false)
+
+func checkForLower(in_Location):
+	if in_Location.y-1 != 0:
+		if matrix[in_Location.x][in_Location.y-1][in_Location.z] != null:
+			matrix[in_Location.x][in_Location.y][in_Location.z].set_outlineVisibility(false)
+
 
 func saveCurrentMap():
 	var fileExporter = shell.get_node("fileExporter")

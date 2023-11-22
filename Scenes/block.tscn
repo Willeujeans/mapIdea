@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://nvexp26y0on7"]
+[gd_scene load_steps=9 format=3 uid="uid://nvexp26y0on7"]
 
 [ext_resource type="Script" path="res://Scripts/s_block.gd" id="1_e4g4i"]
 [ext_resource type="ArrayMesh" uid="uid://c7e1k4hwmptx1" path="res://models/regular.obj" id="2_acrrp"]
+[ext_resource type="Shader" path="res://Scenes/terrain.gdshader" id="3_s7o80"]
+[ext_resource type="Shader" path="res://materials/block.gdshader" id="4_odu8t"]
+[ext_resource type="Material" uid="uid://dm8vjcukgkbar" path="res://materials/boldLine.tres" id="4_s3jrs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3js14"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tc27m"]
-transparency = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4dm3"]
+render_priority = 0
+shader = ExtResource("3_s7o80")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_qyc7s"]
-material = SubResource("StandardMaterial3D_tc27m")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4kn5"]
+render_priority = 0
+shader = ExtResource("4_odu8t")
 
 [node name="block" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -25,8 +30,21 @@ mesh = ExtResource("2_acrrp")
 shape = SubResource("BoxShape3D_3js14")
 
 [node name="terrainLayer" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.499526, 0, 0, 0, 0.999052, 0, 0, 0, 0.499526, 2.08165e-12, 0.55, 2.08165e-12)
-visible = false
-mesh = SubResource("PlaneMesh_qyc7s")
+transform = Transform3D(0.5, 0, 0, 0, 0.003, 0, 0, 0, 0.5, 2.08165e-12, 0.51, 2.08165e-12)
+mesh = ExtResource("2_acrrp")
+surface_material_override/0 = SubResource("ShaderMaterial_p4dm3")
+
+[node name="MeshInstance3DMove" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.525, 0, 0, 0, 0.02, 0, 0, 0, 0.525, 2.08165e-12, -0.498, 2.08165e-12)
+mesh = ExtResource("2_acrrp")
+skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = SubResource("ShaderMaterial_p4kn5")
+
+[node name="MeshInstance3DStatic" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.52, 0, 0, 0, 0.02, 0, 0, 0, 0.52, 2.08165e-12, -0.498, 2.08165e-12)
+material_override = ExtResource("4_s3jrs")
+mesh = ExtResource("2_acrrp")
+skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = SubResource("ShaderMaterial_p4kn5")
 
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

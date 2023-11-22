@@ -2,7 +2,7 @@ extends Node3D
 
 func _ready():
 	var saveDocumentPath = "/Users/willschmitz/Documents/Code/mapIdea/SavedData"
-	saveDocumentPath = "D:/godotProjects/mapIdea/SavedData"
+	#saveDocumentPath = "D:/godotProjects/mapIdea/SavedData"
 	loadAllSavedFiles(saveDocumentPath)
 
 func loadAllSavedFiles(folder):

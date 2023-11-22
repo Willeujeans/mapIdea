@@ -2,6 +2,7 @@ extends Node3D
 @onready var shell = get_tree().get_root().get_node("shell")
 var mapManager
 var hoveredBlock
+@onready var originalCameraRotation = $playerCamera.rotation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,10 +20,14 @@ func set_Height():
 func _process(delta):
 	if Input.is_action_just_pressed("save"):
 		shell.get_node("container").get_node("mapWorld").get_node("mapManager").saveCurrentMap()
-	if Input.is_action_pressed("rotateUp"):
-		$playerCamera.rotation = $playerCamera.rotation + Vector3(.01,0,0)
-	if Input.is_action_pressed("rotateDown"):
-		$playerCamera.rotation = $playerCamera.rotation + Vector3(-.01,0,0)
+	if Input.is_action_just_pressed("rotateUp"):
+		if $playerCamera.rotation == originalCameraRotation:
+			$playerCamera.rotation = Vector3(-45,0,0)
+			$playerCamera.position = $playerCamera.position + Vector3(0,0,10)
+	if Input.is_action_just_pressed("rotateDown"):
+		if $playerCamera.rotation == Vector3(-45,0,0):
+			$playerCamera.rotation = originalCameraRotation
+			$playerCamera.position = $playerCamera.position + Vector3(0,0,-10)
 	if Input.is_action_pressed("up"):
 		$playerCamera.position = $playerCamera.position + Vector3(0,0,-0.1)
 	if Input.is_action_pressed("down"):
