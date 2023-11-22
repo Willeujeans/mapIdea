@@ -62,6 +62,7 @@ func createDefaultGrid(gridSize):
 		positionForCubes.x = 0
 		for j in gridSize:
 			createSquare(Vector3(positionForCubes.x, 0, positionForCubes.z),Vector3(j, 0, i))
+			positionForCubes.x += 0.5
 		positionForCubes.z += 0.5
 
 #Given the location of a square within the matrix another square will be created above it
