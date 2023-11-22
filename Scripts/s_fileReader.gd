@@ -1,5 +1,4 @@
 extends Node
-@onready var shell = get_tree().get_root().get_node("shell")
 
 func textFromFile(filePath):
 	var file = FileAccess.open(filePath, FileAccess.READ)

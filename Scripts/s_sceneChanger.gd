@@ -1,5 +1,4 @@
 extends Node
-@onready var shell = get_tree().get_root().get_node("shell")
 
 func changeSceneTo(target, in_scene):
 	print("changing Scene...")
