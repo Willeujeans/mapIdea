@@ -36,7 +36,7 @@ func _process(delta):
 		if Input.is_action_pressed("clicked"):
 			if !shell.get_node("tmp").UIlock:
 				if mapManager.currentHeight == hoveredBlock.mapLocation.y:
-					mapManager.createSquare(hoveredBlock.position, hoveredBlock.mapLocation)
+					mapManager.createSquare(Vector3(hoveredBlock.position.x,hoveredBlock.position.y+0.5,hoveredBlock.position.z), Vector3(hoveredBlock.mapLocation.x,hoveredBlock.mapLocation.y+1,hoveredBlock.mapLocation.z))
 				
 		if Input.is_action_just_released("clicked"):
 			mapManager.currentHeight = hoveredBlock.mapLocation.y

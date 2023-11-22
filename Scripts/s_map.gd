@@ -48,6 +48,7 @@ func createMapFromImport(in_matrix, size):
 				if in_matrix[x][y][z] != null:
 					in_matrix[x][y][z].position = Vector3(positionForCubes.x, positionForCubes.y, positionForCubes.z)
 					add_child(in_matrix[x][y][z])
+					checkFourNeighbors(in_matrix[x][y][z].mapLocation, [], true)
 				positionForCubes.x += scaleForCubes.x
 			positionForCubes.x = 0
 			positionForCubes.z += scaleForCubes.z
@@ -60,26 +61,19 @@ func createDefaultGrid(gridSize):
 	for i in gridSize:
 		positionForCubes.x = 0
 		for j in gridSize:
-			var newBlock = blockScene.instantiate()
-			newBlock.position = Vector3(positionForCubes.x, 1, positionForCubes.z)
-			positionForCubes.x += scaleForCubes.x
-			newBlock.mapLocation = Vector3(j, 0, i)
-			newBlock.set_TerrainType("b")
-			set_MatrixAtIndex(j,0,i,newBlock)
-			add_child(newBlock)
+			createSquare(Vector3(positionForCubes.x, 0, positionForCubes.z),Vector3(j, 0, i))
 		positionForCubes.z += 0.5
 
 #Given the location of a square within the matrix another square will be created above it
 func createSquare(myLocation, mapPosition):
-	if matrix[mapPosition.x][mapPosition.y+1][mapPosition.z] == null:
+	if matrix[mapPosition.x][mapPosition.y][mapPosition.z] == null:
 		var newMapBlock = blockScene.instantiate()
-		newMapBlock.set_MapLocation(Vector3(mapPosition.x, mapPosition.y+1, mapPosition.z)) 
+		newMapBlock.set_MapLocation(Vector3(mapPosition.x, mapPosition.y, mapPosition.z)) 
 		newMapBlock.set_TerrainType(currentTerrain)
-		set_MatrixAtIndex(mapPosition.x,mapPosition.y+1,mapPosition.z,newMapBlock)
-		newMapBlock.position = Vector3(myLocation.x,myLocation.y+scaleForCubes.y,myLocation.z)
+		set_MatrixAtIndex(mapPosition.x,mapPosition.y,mapPosition.z,newMapBlock)
+		newMapBlock.position = Vector3(myLocation.x,myLocation.y,myLocation.z)
 		add_child(newMapBlock)
-		var arrayOfNeighborsChecked = []
-		checkFourNeighbors(newMapBlock.mapLocation, arrayOfNeighborsChecked, true)
+		checkFourNeighbors(newMapBlock.mapLocation, [], true)
 
 #Given a square it will be removed, and the location will be set to null
 func destroySquare(squareToBeDestroyed):
