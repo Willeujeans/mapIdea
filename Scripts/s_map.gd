@@ -61,16 +61,16 @@ func createDefaultGrid(gridSize):
 	for i in gridSize:
 		positionForCubes.x = 0
 		for j in gridSize:
-			createSquare(Vector3(positionForCubes.x, 0, positionForCubes.z),Vector3(j, 0, i))
+			createSquare(Vector3(positionForCubes.x, 0, positionForCubes.z),Vector3(j, 0, i),"b")
 			positionForCubes.x += 0.5
 		positionForCubes.z += 0.5
 
 #Given the location of a square within the matrix another square will be created above it
-func createSquare(myLocation, mapPosition):
+func createSquare(myLocation, mapPosition, terrain):
 	if matrix[mapPosition.x][mapPosition.y][mapPosition.z] == null:
 		var newMapBlock = blockScene.instantiate()
 		newMapBlock.set_MapLocation(Vector3(mapPosition.x, mapPosition.y, mapPosition.z)) 
-		newMapBlock.set_TerrainType(currentTerrain)
+		newMapBlock.set_TerrainType(terrain)
 		set_MatrixAtIndex(mapPosition.x,mapPosition.y,mapPosition.z,newMapBlock)
 		newMapBlock.position = Vector3(myLocation.x,myLocation.y,myLocation.z)
 		add_child(newMapBlock)
