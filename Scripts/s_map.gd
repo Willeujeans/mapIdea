@@ -6,7 +6,7 @@ var gridSize = 4
 var scaleForCubes = Vector3(0.5,0.5,0.5)
 var currentHeight = 0
 var matrix = []
-var currentTerrain = "w"
+var currentTerrain = "d"
 var currentShape = 0
 @onready var allSides = load("res://models/allSides.obj")
 @onready var bottom = load("res://models/bottom.obj")
@@ -75,7 +75,6 @@ func createSquare(myLocation, mapPosition):
 		newMapBlock.position = Vector3(myLocation.x,myLocation.y,myLocation.z)
 		add_child(newMapBlock)
 		checkFourNeighbors(newMapBlock.mapLocation, [], true)
-		#checkForLower(newMapBlock.mapLocation)
 
 #Given a square it will be removed, and the location will be set to null
 func destroySquare(squareToBeDestroyed):

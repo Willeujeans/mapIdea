@@ -37,10 +37,11 @@ float cnoise(vec2 P){
 }
 const float adjustment = 0.01;
 const float speed = 0.2;
+
 void fragment(){
 //	ALBEDO = vec3(cnoise(UV*14.0)); 
 	vec3 guy = vec3(cnoise(TIME*speed+UV*20.0));
 	ALBEDO = guy;
 	ALPHA = guy.r+adjustment/guy.g/guy.b;
-	ALBEDO = vec3(0,0,0);
+	ALBEDO = vec3(0.2,0.1,0.0);
 }

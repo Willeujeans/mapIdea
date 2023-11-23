@@ -6,12 +6,9 @@ func _ready():
 	print("map controls loaded")
 
 
-func _on_tool_button_pressed():
-	var map = get_tree().current_scene.get_node("map")
-	if map.currentShape == 1:
-		map.currentShape = 0
-	else:
-		map.currentShape = 1
+func _on_door_button_pressed():
+	var map = shell.get_node("container").get_node("mapWorld").get_node("mapManager")
+	map.currentTerrain = "e"
 
 func _on_mouse_entered():
 	shell.get_node("tmp").UIlock = true
@@ -27,12 +24,12 @@ func _on_save_button_pressed():
 	shell.get_node("container").get_node("mapWorld").get_node("mapManager").saveCurrentMap()
 
 
-func _on_tool_button_mouse_entered():
+func _on_door_button_mouse_entered():
 	shell.get_node("tmp").UIlock = true
 	print(shell.get_node("tmp").UIlock)
 
 
-func _on_tool_button_mouse_exited():
+func _on_door_button_mouse_exited():
 	shell.get_node("tmp").UIlock = false
 	print(shell.get_node("tmp").UIlock)
 

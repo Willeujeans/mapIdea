@@ -1,9 +1,10 @@
 extends Node3D
 var mapLocation = Vector3(0,0,0)
 var terrainType = "b"
-
+@onready var door = load("res://models/door.obj")
+var change = 0.05
 func _ready():
-	var colorBasedOnHeight = Color(0.9-mapLocation.y*0.1,0.9-mapLocation.y*0.1,0.9-mapLocation.y*0.1,1)
+	var colorBasedOnHeight = Color(0.75-(mapLocation.y*change-0.1),0.75-mapLocation.y*change,0.65-mapLocation.y*change,1)
 	set_Color(colorBasedOnHeight)
 
 func set_TerrainType(in_terrain):
