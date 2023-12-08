@@ -35,13 +35,13 @@ float cnoise(vec2 P){
   float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
   return 2.3 * n_xy;
 }
-const float adjustment = 0.01;
+const float adjustment = 0.0;
 const float speed = 0.2;
 
 void fragment(){
 //	ALBEDO = vec3(cnoise(UV*14.0)); 
 	vec3 guy = vec3(cnoise(TIME*speed+UV*20.0));
 	ALBEDO = guy;
-	ALPHA = guy.r+adjustment/guy.g/guy.b;
+	ALPHA = guy.r+adjustment+guy.g/guy.b;
 	ALBEDO = vec3(0.2,0.1,0.0);
 }
